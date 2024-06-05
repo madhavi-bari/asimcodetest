@@ -1,0 +1,120 @@
+# Learn more about configuring your checkout UI extension:
+# https://shopify.dev/api/checkout-extensions/checkout/configuration
+
+# The version of APIs your extension will receive. Learn more:
+# https://shopify.dev/docs/api/usage/versioning
+api_version = "2024-01"
+
+[[extensions]]
+type = "ui_extension"
+name = "Shipping-Date-Picker"
+handle = "shipping-date-picker"
+
+# Controls where in Shopify your extension will be injected,
+# and the file that contains your extension’s source code. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/extension-targets-overview
+
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "Checkout::ShippingMethods::RenderAfter"
+
+[extensions.capabilities]
+# Gives your extension access to directly query Shopify’s storefront API.
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#api-access
+api_access = true
+network_access = true
+block_progress = true
+
+# Gives your extension access to make external network calls, using the
+# JavaScript `fetch()` API. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#network-access
+# network_access = true
+
+# Loads metafields on checkout resources, including the cart,
+# products, customers, and more. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#metafields
+
+# [[extensions.metafields]]
+# namespace = "my_namespace"
+# key = "my_key"
+# [[extensions.metafields]]
+# namespace = "my_namespace"
+# key = "my_other_key"
+
+namespace = "checkout"
+key = "show_shipping_date_picker"
+
+# Defines settings that will be collected from merchants installing
+# your extension. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#settings-definition
+
+ [extensions.settings]
+ [[extensions.settings.fields]]
+    key = "cut_off_time"
+    type = "single_line_text_field"
+    name = "Cut off Time"
+    description = "Placing order after this time will be consider to next day Delivery"
+
+[[extensions.settings.fields]]
+    key = "disable_date"
+    type = "date"
+    name = "Disable Date 1"
+    description = "Choose 1st start date you want to disable"
+
+[[extensions.settings.fields]]
+    key = "disable_date_2"
+    type = "date"
+    name = "Disable Date 2"
+    description = "Choose 2nd date you want to disable"
+
+[[extensions.settings.fields]]
+    key = "disable_date_3"
+    type = "date"
+    name = "Disable Date 3"
+    description = "Choose 3rd date you want to disable"
+
+[[extensions.settings.fields]]
+    key = "disable_date_4"
+    type = "date"
+    name = "Disable Date 4"
+    description = "Choose 4th date you want to disable"
+
+[[extensions.settings.fields]]
+    key = "disable_date_5"
+    type = "date"
+    name = "Disable Date 5"
+    description = "Choose 5th date you want to disable"
+
+[[extensions.settings.fields]]
+    key = "timezone"
+    type = "single_line_text_field"
+    name = "Timezone"
+    description = "Shop Timezone, e.g: UTC+1, UTC+5, UTC+11, UTC+9:30 (Without Space)"
+    [[extensions.settings.fields.validations]]
+    name = "max"
+    value = "8"
+
+[[extensions.settings.fields]]
+    key = "multiple_days"
+    type = "multi_line_text_field"
+    name = "Choose Multiple Day"
+    description = "Add Day e.g: Saturday,Sunday or Sunday,Monday"
+
+
+[[extensions.settings.fields]]
+    key = "deliveryDate"
+    type = "single_line_text_field"
+    name = "Product Tag for Delivery Date"
+    description = "Add product tag, on the basis of Delivery Datepicker will be enable"
+
+[[extensions.settings.fields]]
+    key = "dropShipping"
+    type = "single_line_text_field"
+    name = "Drop Shipping products tag"
+    description = "Add product tag that are eligible for Drop shipping"
+ 
+[[extensions.settings.fields]]
+    key = "noDelivery"
+    type = "single_line_text_field"
+    name = "Product tag to hide Delivery Date"
+    description = "Add product tag which are not eligible for Delivery Date"
